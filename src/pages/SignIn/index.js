@@ -7,8 +7,7 @@ import { port } from "../../port"
 import logo from "../../assets/Orange_Simple_Online_Shopping_Logo_1.png"
 
 export default function SingIn() {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [loginData, setLoginData] = useState({ email: "", password: "" })
 
     const { auth, login } = useAuth()
     const navigate = useNavigate()
@@ -25,8 +24,8 @@ export default function SingIn() {
         e.preventDefault()
 
         const url = `${port}/`
-        const body = { email, password }
-        axios.post(url, body)
+
+        axios.post(url, loginData)
             .then(sucess => {
                 login(sucess.data)
                 navigate("/home")
@@ -34,13 +33,36 @@ export default function SingIn() {
             .catch(fail => alert(fail.response.data))
     }
 
+
+    function insertLoginData(event) {
+        event.target.setCustomValidity('');
+        const value = event.target.value;
+        const attribute = event.target.name;
+
+        setLoginData({ ...loginData, [attribute]: value });
+    }
+
     return (
         <PageContainer>
             <FormContainer>
                 <FormImage src={logo}></FormImage>
                 <PageForm onSubmit={singIn}>
-                    <FormInput placeholder="E-Mail" type="email" required onChange={(e) => setEmail(e.target.value)}></FormInput>
-                    <FormInput placeholder="Senha" type="password" required onChange={(e) => setPassword(e.target.value)}></FormInput>
+                    <FormInput
+                        placeholder="E-mail"
+                        type="email"
+                        name="email"
+                        required
+                        onChange={insertLoginData}
+                        onInvalid={(event) => event.target.setCustomValidity('Por favor, insira um e-mail válido.')}
+                    />
+                    <FormInput
+                        placeholder="Senha"
+                        type="password"
+                        name="password"
+                        required
+                        onChange={insertLoginData}
+                        onInvalid={(event) => event.target.setCustomValidity('Insira sua senha.')}
+                    />
                     <FormButton type="submit">Login</FormButton>
                 </PageForm>
                 <StyledLink to={"/cadastro"}>Nao possui uma conta? Faca o cadastro aqui!</StyledLink>
