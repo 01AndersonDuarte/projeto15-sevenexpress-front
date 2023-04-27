@@ -7,6 +7,14 @@ export const PageForm = styled.form`
 
     width: 700px;
     gap: 15px;
+
+    input:focus{
+        transform: scale(1.07);
+    }
+    input:focus::-webkit-input-placeholder {
+        color: transparent;
+    }
+    
     @media screen and (max-width: 700px){
         width: 90%;
     }
