@@ -20,7 +20,9 @@ export default function SignUp() {
         const url = `${port}/cadastro`
         const body = {name, email, password}
 
-        axios.post(url, body).then(sucess => alert(sucess.data)).catch(fail => alert(fail.response.data))
+        axios.post(url, body)
+            .then(sucess => alert(sucess.data))
+            .catch(fail => alert(fail.response.data))
     }
 
     return (
@@ -32,7 +34,7 @@ export default function SignUp() {
                     <FormInput placeholder="Confirme a senha" type="password" required onChange={(e) => setConfirmPassword(e.target.value)}></FormInput>
                     <FormButton type="submit">Cadastro</FormButton>
                 </PageForm>
-                <StyledLink>Ja tem cadastro? Entao siga para o seu login aqui!</StyledLink>
+                <StyledLink to={"/"}>Ja tem cadastro? Entao siga para o seu login aqui!</StyledLink>
         </PageContainer>
     )
 }
