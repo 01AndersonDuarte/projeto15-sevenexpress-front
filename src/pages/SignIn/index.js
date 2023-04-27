@@ -23,7 +23,7 @@ export default function SingIn() {
     function singIn(e) {
         e.preventDefault()
 
-        const url = `${port}/`
+        const url = `${port}/login`
 
         axios.post(url, loginData)
             .then(sucess => {
