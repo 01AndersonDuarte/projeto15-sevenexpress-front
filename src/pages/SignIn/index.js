@@ -7,8 +7,6 @@ import { port } from "../../port"
 
 export default function SingIn() {
     const [loginData, setLoginData] = useState({ email: "", password: "" })
-    // const [email, setEmail] = useState("")
-    // const [password, setPassword] = useState("")
 
     const { auth, login } = useAuth()
     const navigate = useNavigate()
@@ -25,8 +23,6 @@ export default function SingIn() {
         e.preventDefault()
 
         const url = `${port}/`
-        // const body = { email, password }
-
         axios.post(url, loginData)
             .then(sucess => {
                 login(sucess.data)
