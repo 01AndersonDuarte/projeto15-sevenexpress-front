@@ -10,7 +10,7 @@ function App() {
       <AuthProvider>
         <Routes>
           <Route path="/cadastro" element={<SignUp></SignUp>} />
-          <Route path="/" element={<SingIn></SingIn>} />
+          <Route path="/login" element={<SingIn></SingIn>} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

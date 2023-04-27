@@ -7,6 +7,9 @@ export const StyledLink = styled(Link)`
     margin-top: 15px;
     width: 60%;
     text-align: center;
+
+    color: white;
+    font-weight: 700;
     @media screen and (max-width: 700px){
         width: 90%;
     }

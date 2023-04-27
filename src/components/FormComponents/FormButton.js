@@ -7,8 +7,8 @@ export const FormButton = styled.button`
     border: none;
     font-weight: 700;
 
-    background-color: orange;
-    color: #FFFFFF;
+    background-color: #000000;
+    color: #ffffff;
     font-size: 18px;
     @media screen and (max-width: 700px) {
         width: 100%;
