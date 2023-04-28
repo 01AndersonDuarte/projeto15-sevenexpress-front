@@ -1,5 +1,5 @@
 import Header from "../../components/Header";
-import { MainContainer, HeaderIMG, ContainerLoading } from "./style";
+import { MainContainer, HeaderIMG, ContainerLoading, Item } from "./style";
 // import 'react-slideshow-image/dist/styles.css'
 // import { Slide } from 'react-slideshow-image';
 import header2 from "../../assets/Beige and White Neutral eCommerce Spring Sale Banner  (2).jpg"
@@ -15,21 +15,23 @@ export default function HomePage() {
     const [products, setProducst] = useState();
     const [searchValue, setSearchValue] = useState("");
     const [filteredProducts, setFilteredProducts] = useState([]);
+    const inputRef = useRef(null);
 
     useEffect(() => {
         const url = `${port}/produtos`;
 
         axios.get(url)
             .then(sucess => {
-                // console.log(sucess);
                 setProducst(sucess.data);
             })
             .catch(fail => alert(fail.response.data));
+
         const filtered = products?.filter((p) =>
             {
                 if(searchValue!=='') return p.name.toLowerCase().includes(searchValue.toLowerCase());
             }
         );
+        console.log(filtered);
         setFilteredProducts(filtered);
     }, [searchValue]);
 
@@ -62,22 +64,34 @@ export default function HomePage() {
         </>
     ) */
 
+    function getSuggestionsPosition(){
+        const inputRect = inputRef.current.getBoundingClientRect();
+        const top = inputRect.bottom;
+        const left = inputRect.left;
+        const width = inputRect.width;
+        const position = "absolute";
+        const backgroundColor = "white";
+        const borderRadius = "2px"
+        const border = "solid 1px rgba(212, 212, 212, 1)";
+        return { top, left, width, position, backgroundColor, borderRadius, border };
+    };
+
     return (
-        <>
-            <Header setResearch={setSearchValue} searchValue={searchValue}></Header>
+        <div style={{ position: "relative" }}>
+            <Header setResearch={setSearchValue} searchValue={searchValue} inputRef={inputRef}></Header>
             {
-                !filteredProducts ?
+                !filteredProducts || filteredProducts.length===0 ?
                     ''
                     :
-                    <ContainerLoading>
+                    <div style={{ ...getSuggestionsPosition() }}>
                         <ul>
                             {filteredProducts.map((product, index) => (
-                                <li key={product.index}>
+                                <Item key={index} onClick={()=>console.log("Ir para página do produto")}>
                                     <p>{product.name}</p>
-                                </li>
+                                </Item>
                             ))}
                         </ul>
-                    </ContainerLoading>
+                    </div>
             }
             <div className="slide-container">
                 {/* <Slide>
@@ -89,7 +103,7 @@ export default function HomePage() {
                     ))}
                 </Slide> */}
             </div>
-        </>
+        </div>
     )
 }
 

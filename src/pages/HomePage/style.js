@@ -22,8 +22,17 @@ const ContainerLoading = styled.div`
     align-items: center;
 `;
 
+const Item = styled.li`
+    padding: 2%;
+    cursor: pointer;
+    &:hover{
+        background-color: #f2f2f2;
+    }
+`
+
 export {
     MainContainer,
     HeaderIMG,
-    ContainerLoading
+    ContainerLoading,
+    Item
 }
