@@ -9,7 +9,7 @@ const HeaderContainer = styled.div`
     top: 0;
     left: 0;
 
-    background-color: #faa94a;
+    background-color: #ffbd59;
 
     display: flex;
     justify-content: space-around;
@@ -24,16 +24,16 @@ const Menu = styled.div`
 `
 
 const HeaderLogo = styled.img`
-    height: 80px;
+    height: 100px;
     width: auto;
 `
 
 const StyledLink = styled(Link)`
     text-decoration: none;
-    color: #ffffff;
+    color: #333333;
 
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 600;
 `
 
 const HeaderInput = styled.input`
