@@ -3,8 +3,6 @@ import { MainContainer, HeaderIMG } from "./style";
 import 'react-slideshow-image/dist/styles.css'
 import { Slide } from 'react-slideshow-image';
 import header2 from "../../assets/Beige and White Neutral eCommerce Spring Sale Banner  (2).jpg"
-import header4 from "../../assets/header4.png"
-import header5 from "../../assets/header5.png"
 import header8 from "../../assets/header8.jpg"
 
 export default function HomePage() {
