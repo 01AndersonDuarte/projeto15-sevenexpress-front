@@ -14,8 +14,16 @@ const HeaderIMG = styled.img`
     height:340px;
     border-radius: 20px;
 `
+const ContainerLoading = styled.div`
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
 
 export {
     MainContainer,
-    HeaderIMG
+    HeaderIMG,
+    ContainerLoading
 }
