@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 
 const HeaderContainer = styled.div`
     position: fixed;
+    z-index: 1;
     width: 100%;
     height: 100px;
     top: 0;

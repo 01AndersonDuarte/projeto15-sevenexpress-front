@@ -2,16 +2,16 @@ import Header from "../../components/Header";
 import { MainContainer, HeaderIMG, ContainerLoading, Item } from "./style";
 import { LoadingRings } from "../../components/Loading/Loading";
 
-// import 'react-slideshow-image/dist/styles.css'
-// import { Slide } from 'react-slideshow-image';
+import 'react-slideshow-image/dist/styles.css'
+import { Slide } from 'react-slideshow-image';
 import header1 from "../../assets/header1.jpg"
 import header3 from "../../assets/header.jpg"
 import header4 from "../../assets/header9.jpg"
 import header5 from "../../assets/header11.jpg"
-import header2 from "../../assets/Beige and White Neutral eCommerce Spring Sale Banner  (2).jpg"
-import header4 from "../../assets/header4.png"
-import header5 from "../../assets/header5.png"
-import header8 from "../../assets/header8.jpg"
+// import header2 from "../../assets/Beige and White Neutral eCommerce Spring Sale Banner  (2).jpg"
+// import header4 from "../../assets/header4.png"
+// import header5 from "../../assets/header5.png"
+// import header8 from "../../assets/header8.jpg"
 
 import React, { useState, useEffect, useRef } from "react";
 import { port } from "../../port";
@@ -72,13 +72,14 @@ export default function HomePage() {
         const width = inputRect.width;
         const position = "absolute";
         const backgroundColor = "white";
-        const borderRadius = "2px"
+        const borderRadius = "2px";
         const border = "solid 1px rgba(212, 212, 212, 1)";
-        return { top, left, width, position, backgroundColor, borderRadius, border };
+        const zIndex = "1";
+        return { top, left, width, position, backgroundColor, borderRadius, border, zIndex };
     };
 
     return (
-        <div style={{ position: "relative" }}>
+        <div style={{ position: "relative"}}>
             <Header setResearch={setSearchValue} searchValue={searchValue} inputRef={inputRef}></Header>
             {
                 !filteredProducts || filteredProducts.length===0 ?
@@ -95,14 +96,14 @@ export default function HomePage() {
                     </div>
             }
             <div className="slide-container">
-                {/* <Slide>
+                <Slide>
                     {slideImages.map((slideImage, index) => (
                         <div key={index}>
                             <div style={{ ...divStyle, 'backgroundImage': `url(${slideImage.url})` }}>
                             </div>
                         </div>
                     ))}
-                </Slide> */}
+                </Slide>
             </div>
         </div>
     )

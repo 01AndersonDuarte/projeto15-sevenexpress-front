@@ -7,6 +7,12 @@ const MainContainer = styled.div`
     align-items: center;
     justify-content: center;
 `
+const HeaderIMG = styled.img`
+    margin-top: 30px;
+    width: 80%;
+    height:340px;
+    border-radius: 20px;
+`
 const ContainerLoading = styled.div`
     height: 100vh;
     display: flex;
