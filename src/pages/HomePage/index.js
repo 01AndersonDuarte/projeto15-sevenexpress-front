@@ -1,15 +1,21 @@
 import Header from "../../components/Header";
 import { MainContainer, HeaderIMG, ContainerLoading, Item } from "./style";
+import { LoadingRings } from "../../components/Loading/Loading";
+
 // import 'react-slideshow-image/dist/styles.css'
 // import { Slide } from 'react-slideshow-image';
+import header1 from "../../assets/header1.jpg"
+import header3 from "../../assets/header.jpg"
+import header4 from "../../assets/header9.jpg"
+import header5 from "../../assets/header11.jpg"
 import header2 from "../../assets/Beige and White Neutral eCommerce Spring Sale Banner  (2).jpg"
 import header4 from "../../assets/header4.png"
 import header5 from "../../assets/header5.png"
 import header8 from "../../assets/header8.jpg"
+
 import React, { useState, useEffect, useRef } from "react";
 import { port } from "../../port";
 import axios from "axios";
-import { LoadingRings } from "../../components/Loading/Loading";
 
 export default function HomePage() {
     const [products, setProducst] = useState();
@@ -46,7 +52,10 @@ export default function HomePage() {
 
     const slideImages = [
         {
-            url: header8
+            url: header1
+        },
+        {
+            url: header3
         },
         {
             url: header4
@@ -55,14 +64,6 @@ export default function HomePage() {
             url: header5
         },
     ];
-    /* return (
-        <>
-            <Header></Header>
-            <MainContainer>
-                <HeaderIMG src={header8}></HeaderIMG>
-            </MainContainer>
-        </>
-    ) */
 
     function getSuggestionsPosition(){
         const inputRect = inputRef.current.getBoundingClientRect();
