@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import lupa from "../../assets/images.png"
 
 export default function Header() {
+
     return (
         <HeaderContainer>
             <HeaderLogo src={logo}></HeaderLogo>
