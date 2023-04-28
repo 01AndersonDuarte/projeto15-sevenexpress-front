@@ -1,0 +1,94 @@
+import styled from "styled-components"
+import { Link } from "react-router-dom"
+
+
+const HeaderContainer = styled.div`
+    position: fixed;
+    width: 100%;
+    height: 100px;
+    top: 0;
+    left: 0;
+
+    background-color: #faa94a;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+`
+
+const Menu = styled.div`
+    width: 200px;
+
+    display: flex;
+    justify-content: space-between;
+`
+
+const HeaderLogo = styled.img`
+    height: 80px;
+    width: auto;
+`
+
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: #ffffff;
+
+    font-size: 18px;
+    font-weight: 700;
+`
+
+const HeaderInput = styled.input`
+    height: 50px;
+    border: none;
+    outline: 0;
+    padding: 0;
+    box-sizing: border-box;
+    padding: 7px;
+
+    width: 300px;
+    border-radius: 5px 0px 0px 5px;
+`
+
+const HeaderButton = styled.button`
+    height: 50px;
+    border: none;
+    
+    background-color: #ffffff;
+
+    width: 50px;
+    border-radius: 0px 5px 5px 0px;
+
+    img {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 5px;
+    }
+`
+
+const SearchBar = styled.div`
+    display: flex;
+    align-items: center;
+
+    hr{
+        height: 50px;
+        color: black;
+        background-color: black;
+        width: 1px;
+        border: none;
+    }
+`
+
+
+
+export {
+    HeaderContainer,
+    Menu,
+    HeaderLogo,
+    StyledLink,
+    HeaderInput,
+    HeaderButton,
+    SearchBar
+
+}
