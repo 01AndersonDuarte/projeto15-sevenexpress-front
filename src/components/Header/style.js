@@ -21,6 +21,11 @@ const Menu = styled.div`
 
     display: flex;
     justify-content: space-between;
+    @media screen and (max-width: 700px){
+        display: none;
+    }
+
+
 `
 
 const HeaderLogo = styled.img`
@@ -46,6 +51,10 @@ const HeaderInput = styled.input`
 
     width: 300px;
     border-radius: 5px 0px 0px 5px;
+
+    @media screen and (max-width: 700px){
+        width: 100%;
+    }
 `
 
 const HeaderButton = styled.button`
@@ -77,6 +86,10 @@ const SearchBar = styled.div`
         background-color: black;
         width: 1px;
         border: none;
+    }
+
+    @media screen and (max-width: 700px){
+        width: 60%;
     }
 `
 

@@ -6,6 +6,7 @@ import lupa from "../../assets/images.png"
 import cart from "../../assets/cart icon.jpg"
 
 export default function Header() {
+
     return (
         <HeaderContainer>
             <HeaderLogo src={logo}></HeaderLogo>
