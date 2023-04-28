@@ -8,14 +8,6 @@ const MainContainer = styled.div`
     justify-content: center;
 `
 
-const HeaderIMG = styled.img`
-    margin-top: 30px;
-    width: 80%;
-    height:340px;
-    border-radius: 20px;
-`
-
 export {
     MainContainer,
-    HeaderIMG
 }
