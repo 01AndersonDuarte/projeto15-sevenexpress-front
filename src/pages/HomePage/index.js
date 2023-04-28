@@ -6,45 +6,51 @@ import header2 from "../../assets/Beige and White Neutral eCommerce Spring Sale 
 import header4 from "../../assets/header4.png"
 import header5 from "../../assets/header5.png"
 import header8 from "../../assets/header8.jpg"
+import React from "react"
 
 export default function HomePage() {
     const slideImages = [
         {
-          url: header8,
-          caption: 'Slide 1'
+            url: header8
         },
         {
-          url: 'https://images.unsplash.com/photo-1506710507565-203b9f24669b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1536&q=80',
-          caption: 'Slide 2'
+            url: header4
         },
         {
-          url: 'https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80',
-          caption: 'Slide 3'
+            url: header5
         },
-      ];
-    return (
+    ];
+    /* return (
         <>
             <Header></Header>
             <MainContainer>
-            <Slide>
-                    {slideImages.map((slideImage, index)=> (
-                        <div key={index}>
-                        <div style={{ ...divStyle, 'backgroundImage': `url(${slideImage.url})` }}>
-                            <span>{slideImage.caption}</span>
-                        </div>
-                        </div>
-                    ))} 
-            </Slide>
-                    {/* <HeaderIMG src={header8}></HeaderIMG> */}
+                <HeaderIMG src={header8}></HeaderIMG>
             </MainContainer>
+        </>
+    ) */
+
+    return (
+        <>  
+            <Header></Header>
+            <div className="slide-container">
+                <Slide>
+                    {slideImages.map((slideImage, index) => (
+                        <div key={index}>
+                            <div style={{ ...divStyle, 'backgroundImage': `url(${slideImage.url})` }}>
+                            </div>
+                        </div>
+                    ))}
+                </Slide>
+            </div>
         </>
     )
 }
 
 const divStyle = {
     display: 'flex',
+    marginTop: "100px",
     alignItems: 'center',
     justifyContent: 'center',
     backgroundSize: 'cover',
     height: '400px'
-  }
+}
