@@ -11,7 +11,13 @@ export default function Header({ setResearch, searchValue, inputRef }) {
         <HeaderContainer>
             <HeaderLogo src={logo}></HeaderLogo>
             <SearchBar>
-                <HeaderInput type="text" placeholder="Faça sua pesquisa"></HeaderInput>
+                <HeaderInput
+                    type="text"
+                    placeholder="Buscar produtos"
+                    value={searchValue}
+                    onChange={(e) => setResearch(e.target.value)}
+                    ref={inputRef}
+                />
                 <hr></hr>
                 <HeaderButton><img src={lupa}></img></HeaderButton>
             </SearchBar>
