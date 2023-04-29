@@ -5,26 +5,19 @@ import { Link } from "react-router-dom";
 import lupa from "../../assets/images.png"
 import cart from "../../assets/cart icon.jpg"
 
-
-
 import { useNavigate } from "react-router-dom";
 import { port } from "../../port";
 import axios from "axios";
 import { Item } from "../../pages/HomePage/style";
 
-
 export default function Header() {
-
     const [products, setProducst] = useState();
     const [searchValue, setSearchValue] = useState("");
     const [filteredProducts, setFilteredProducts] = useState([]);
     const inputRef = useRef(null);
     const navigate = useNavigate();
 
-
-
     useEffect(() => {
-
         const url = `${port}/produtos`;
 
         axios.get(url)
@@ -40,8 +33,6 @@ export default function Header() {
         setFilteredProducts(filtered);
     }, [searchValue]);
 
-
-
     function getSuggestionsPosition() {
         const inputRect = inputRef.current.getBoundingClientRect();
         const top = inputRect.bottom;
@@ -54,9 +45,6 @@ export default function Header() {
         const zIndex = "1";
         return { top, left, width, position, backgroundColor, borderRadius, border, zIndex };
     };
-
-
-
 
     return (
         <>
