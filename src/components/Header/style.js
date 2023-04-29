@@ -10,7 +10,7 @@ const HeaderContainer = styled.div`
     top: 0;
     left: 0;
 
-    background-color: #686868;
+    background-color: #FFBD59;
 
     display: flex;
     justify-content: space-around;
@@ -36,7 +36,7 @@ const HeaderLogo = styled.img`
 
 const StyledLink = styled(Link)`
     text-decoration: none;
-    color: #333333;
+    color: 	#333333;
 
     font-size: 18px;
     font-weight: 600;
