@@ -10,12 +10,17 @@ import { port } from "../../port";
 import axios from "axios";
 import { Item } from "../../pages/HomePage/style";
 
+import { CartIconEmpty } from "./style";
+import useAuth from "../../hooks/useAuth";
+
 export default function Header() {
     const [products, setProducst] = useState();
     const [searchValue, setSearchValue] = useState("");
     const [filteredProducts, setFilteredProducts] = useState([]);
     const inputRef = useRef(null);
     const navigate = useNavigate();
+
+    const { auth } = useAuth();
 
     useEffect(() => {
         const url = `${port}/produtos`;
@@ -49,7 +54,7 @@ export default function Header() {
     return (
         <>
             <HeaderContainer>
-                <HeaderLogo src={logo}></HeaderLogo>
+                <Link to={"/"}><HeaderLogo src={logo}></HeaderLogo></Link>
                 <SearchBar>
                     <HeaderInput
                         type="text"
@@ -62,9 +67,20 @@ export default function Header() {
                     <HeaderButton><img src={lupa}></img></HeaderButton>
                 </SearchBar>
                 <Menu>
-                    <StyledLink to={"/login"}>Entre</StyledLink>
-                    <StyledLink to={"/cadastro"}>Crie a sua conta</StyledLink>
-                    <StyledLink src={cart} to={"/carrinho"}></StyledLink>
+                    {auth ?
+                        <p>Olá, {auth.name}</p>
+                            :
+                        <>
+                            <StyledLink to={"/login"}> <p>Entre</p> </StyledLink>
+                            <StyledLink to={"/cadastro"}>
+                                <p>Crie a sua conta</p>
+                            </StyledLink>
+                        </>
+                    }
+
+                    <StyledLink to={"/carrinho"}>
+                        <CartIconEmpty />
+                    </StyledLink>
                 </Menu>
             </HeaderContainer>
             {

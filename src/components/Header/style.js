@@ -1,9 +1,9 @@
 import styled from "styled-components"
 import { Link } from "react-router-dom"
-
+import { BsCartDash } from "react-icons/bs";
 
 const HeaderContainer = styled.div`
-    position: fixed;
+    position: absolute;
     z-index: 1;
     width: 100%;
     height: 100px;
@@ -18,10 +18,17 @@ const HeaderContainer = styled.div`
 `
 
 const Menu = styled.div`
-    width: 200px;
+    width: 25%;
+    font-family: 'Roboto';
+
+    p{
+        font-weight: 300;
+        color: #2c2c2c;
+    }
 
     display: flex;
     justify-content: space-between;
+    align-items: center;
     @media screen and (max-width: 700px){
         display: none;
     }
@@ -93,8 +100,11 @@ const SearchBar = styled.div`
         width: 60%;
     }
 `
-
-
+const CartIconEmpty = styled(BsCartDash)`
+    font-size: 25px;
+    color: #FFFFFF;
+    cursor: pointer;
+`;
 
 export {
     HeaderContainer,
@@ -103,6 +113,7 @@ export {
     StyledLink,
     HeaderInput,
     HeaderButton,
-    SearchBar
+    SearchBar,
+    CartIconEmpty
 
 }
