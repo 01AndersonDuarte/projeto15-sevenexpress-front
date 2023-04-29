@@ -36,7 +36,6 @@ export default function HomePage() {
     }
 
     useEffect(() => {
-
         const url = `${port}/produtos`;
 
         axios.get(url)
@@ -70,7 +69,7 @@ export default function HomePage() {
     ];
 
     return (
-        <div style={{ position: "relative"}}>
+        <>
             <Header/>
             <div className="slide-container">
                 <Slide>
@@ -87,7 +86,7 @@ export default function HomePage() {
                 <Carousel ref={carousel}>
                     <Inner>
                         {products.map(p => (
-                            <StyledLink to={"/login"}>
+                            <StyledLink to={`/produto/${p._id}`}>
                                 <CarouselItem>
 
                                     <img src={p.image}></img>
@@ -111,7 +110,7 @@ export default function HomePage() {
                     <IoArrowForwardCircle></IoArrowForwardCircle>
                 </button>
             </CarouselButtons>
-        </div>
+        </>
     )
 }
 
