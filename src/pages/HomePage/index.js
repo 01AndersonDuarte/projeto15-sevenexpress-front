@@ -20,10 +20,6 @@ import { motion } from "framer-motion"
 
 export default function HomePage() {
     const [products, setProducst] = useState();
-    const [searchValue, setSearchValue] = useState("");
-    const [filteredProducts, setFilteredProducts] = useState([]);
-    const inputRef = useRef(null);
-
     const carousel = useRef()
     const [width, setWidth] = useState(0)
 
@@ -41,20 +37,11 @@ export default function HomePage() {
                 setWidth(carousel.current?.scrollWidth - carousel.current?.offsetWidth);
             })
             .catch(fail => alert(fail.response.data));
-
-        const filtered = products?.filter((p) =>
-            {
-                if(searchValue!=='') return p.name.toLowerCase().includes(searchValue.toLowerCase());
-            }
-        );
-        console.log(filtered);
-        setFilteredProducts(filtered);
-    }, [searchValue]);
+    }, []);
 
     if (!products) {
         return (
             <ContainerLoading>
-                <Header />
                 <LoadingRings />
             </ContainerLoading>
         );
@@ -75,36 +62,9 @@ export default function HomePage() {
         },
     ];
 
-    function getSuggestionsPosition(){
-        const inputRect = inputRef.current.getBoundingClientRect();
-        const top = inputRect.bottom;
-        const left = inputRect.left;
-        const width = inputRect.width;
-        const position = "absolute";
-        const backgroundColor = "white";
-        const borderRadius = "2px";
-        const border = "solid 1px rgba(212, 212, 212, 1)";
-        const zIndex = "1";
-        return { top, left, width, position, backgroundColor, borderRadius, border, zIndex };
-    };
-
     return (
         <div style={{ position: "relative"}}>
-            <Header setResearch={setSearchValue} searchValue={searchValue} inputRef={inputRef}></Header>
-            {
-                !filteredProducts || filteredProducts.length===0 ?
-                    ''
-                    :
-                    <div style={{ ...getSuggestionsPosition() }}>
-                        <ul>
-                            {filteredProducts.map((product, index) => (
-                                <Item key={index} onClick={()=>console.log("Ir para página do produto")}>
-                                    <p>{product.name}</p>
-                                </Item>
-                            ))}
-                        </ul>
-                    </div>
-            }
+            <Header/>
             <div className="slide-container">
                 <Slide>
                     {slideImages.map((slideImage, index) => (
