@@ -1,5 +1,5 @@
 import Header from "../../components/Header";
-import { ContainerLoading, Item, ProductsSlide, Carousel, CarouselItem, Inner } from "./style";
+import { ContainerLoading, Item, ProductsSlide, Carousel, CarouselItem, Inner, CarouselP, StyledLink, CarouselButtons } from "./style";
 import { LoadingRings } from "../../components/Loading/Loading";
 
 import 'react-slideshow-image/dist/styles.css'
@@ -16,7 +16,8 @@ import header5 from "../../assets/header11.jpg"
 import React, { useState, useEffect, useRef } from "react";
 import { port } from "../../port";
 import axios from "axios";
-import { motion } from "framer-motion"
+import {IoArrowBackCircle, IoArrowForwardCircle} from "react-icons/io5"
+
 
 export default function HomePage() {
     const [products, setProducst] = useState();
@@ -25,11 +26,18 @@ export default function HomePage() {
     const inputRef = useRef(null);
 
     const carousel = useRef()
-    const [width, setWidth] = useState(0)
 
-    console.log(width)
-    console.log(carousel.current?.scrollWidth)
-    console.log(carousel.current?.offsetWidth)
+    function right(e) {
+        e.preventDefault()
+
+        carousel.current.scrollLeft += carousel.current.offsetWidth
+    }
+
+    function left(e) {
+        e.preventDefault()
+
+        carousel.current.scrollLeft -= carousel.current.offsetWidth
+    }
 
     useEffect(() => {
 
@@ -38,14 +46,12 @@ export default function HomePage() {
         axios.get(url)
             .then(sucess => {
                 setProducst(sucess.data);
-                setWidth(carousel.current?.scrollWidth - carousel.current?.offsetWidth);
             })
             .catch(fail => alert(fail.response.data));
 
-        const filtered = products?.filter((p) =>
-            {
-                if(searchValue!=='') return p.name.toLowerCase().includes(searchValue.toLowerCase());
-            }
+        const filtered = products?.filter((p) => {
+            if (searchValue !== '') return p.name.toLowerCase().includes(searchValue.toLowerCase());
+        }
         );
         console.log(filtered);
         setFilteredProducts(filtered);
@@ -75,7 +81,7 @@ export default function HomePage() {
         },
     ];
 
-    function getSuggestionsPosition(){
+    function getSuggestionsPosition() {
         const inputRect = inputRef.current.getBoundingClientRect();
         const top = inputRect.bottom;
         const left = inputRect.left;
@@ -89,16 +95,16 @@ export default function HomePage() {
     };
 
     return (
-        <div style={{ position: "relative"}}>
+        <div style={{ position: "relative" }}>
             <Header setResearch={setSearchValue} searchValue={searchValue} inputRef={inputRef}></Header>
             {
-                !filteredProducts || filteredProducts.length===0 ?
+                !filteredProducts || filteredProducts.length === 0 ?
                     ''
                     :
                     <div style={{ ...getSuggestionsPosition() }}>
                         <ul>
                             {filteredProducts.map((product, index) => (
-                                <Item key={index} onClick={()=>console.log("Ir para página do produto")}>
+                                <Item key={index} onClick={() => console.log("Ir para página do produto")}>
                                     <p>{product.name}</p>
                                 </Item>
                             ))}
@@ -115,17 +121,35 @@ export default function HomePage() {
                     ))}
                 </Slide>
             </div>
+
             <ProductsSlide>
-                <Carousel ref={carousel} as={motion.div} whileTap={{cursor: "grabbing"}}>
-                    <Inner as={motion.div} drag="x" dragConstraints={{right: 0, left: -width}} /* initial={{x: 300}} animate={{x: 0}} transition={{duration: 0.6}} */>
+                <Carousel ref={carousel}>
+                    <Inner>
                         {products.map(p => (
-                            <CarouselItem as={motion.div} key={p.image}>
-                                <img src={p.image}></img>
-                            </CarouselItem>
+                            <StyledLink to={"/login"}>
+                                <CarouselItem>
+
+                                    <img src={p.image}></img>
+                                    <hr></hr>
+                                    <CarouselP>
+                                        <p>{p.name}</p>
+                                        <p>R${p.price}</p>
+                                    </CarouselP>
+
+                                </CarouselItem>
+                            </StyledLink>
                         ))}
                     </Inner>
                 </Carousel>
             </ProductsSlide>
+            <CarouselButtons>
+                <button onClick={left}>
+                    <IoArrowBackCircle></IoArrowBackCircle>
+                </button>
+                <button onClick={right}>
+                    <IoArrowForwardCircle></IoArrowForwardCircle>
+                </button>
+            </CarouselButtons>
         </div>
     )
 }
