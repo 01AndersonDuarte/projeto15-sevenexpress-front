@@ -6,22 +6,46 @@ const HeaderContainer = styled.div`
     position: absolute;
     z-index: 1;
     width: 100%;
-    height: 100px;
     top: 0;
     left: 0;
 
     background-color: #FFBD59;
 
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    div{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    ul{
+        font-size: 14px;
+        font-weight: 100;
+        color: #2c2c2c;
+        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 1%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        li{
+            cursor: pointer;
+            &:hover{
+                transform: scale(1.09);
+                color: #000;
+                padding: 0.7%;
+                border: solid 0.5px rgba(255, 255, 255, 1);
+                border-radius: 2px;
+            }
+        }
+    }
 `
 
 const Menu = styled.div`
-    width: 25%;
+    width: 40%;
     font-family: 'Roboto';
 
     p{
+        font-size: 15px;
         font-weight: 300;
         color: #2c2c2c;
     }

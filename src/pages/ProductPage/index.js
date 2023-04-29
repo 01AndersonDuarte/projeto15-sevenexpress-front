@@ -51,7 +51,7 @@ export default function ProductPage() {
 
 const ContainerProduct = styled.div`
     /* height: 100vh; */
-    padding: 10% 10% 5% 10%;
+    padding: 15% 10% 5% 10%;
     display: flex;
     flex-direction: column;
     justify-content: center;

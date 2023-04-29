@@ -54,34 +54,44 @@ export default function Header() {
     return (
         <>
             <HeaderContainer>
-                <Link to={"/"}><HeaderLogo src={logo}></HeaderLogo></Link>
-                <SearchBar>
-                    <HeaderInput
-                        type="text"
-                        placeholder="Buscar produtos"
-                        value={searchValue}
-                        onChange={(e) => setSearchValue(e.target.value)}
-                        ref={inputRef}
-                    />
-                    <hr></hr>
-                    <HeaderButton><img src={lupa}></img></HeaderButton>
-                </SearchBar>
-                <Menu>
-                    {auth ?
-                        <p>Olá, {auth.name}</p>
+                <div>
+                    <Link to={"/"}><HeaderLogo src={logo}></HeaderLogo></Link>
+                    <SearchBar>
+                        <HeaderInput
+                            type="text"
+                            placeholder="Buscar produtos"
+                            value={searchValue}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                            ref={inputRef}
+                        />
+                        <hr></hr>
+                        <HeaderButton><img src={lupa}></img></HeaderButton>
+                    </SearchBar>
+                    <Menu>
+                        {auth ?
+                            <>
+                                <p>Olá, {auth.name}</p>
+                                <StyledLink to={"/"}> <p>Meus pedidos</p> </StyledLink>
+                                <StyledLink to={"/"}> <p>Sair</p> </StyledLink>
+                            </>
                             :
-                        <>
-                            <StyledLink to={"/login"}> <p>Entre</p> </StyledLink>
-                            <StyledLink to={"/cadastro"}>
-                                <p>Crie a sua conta</p>
-                            </StyledLink>
-                        </>
-                    }
-
-                    <StyledLink to={"/carrinho"}>
-                        <CartIconEmpty />
-                    </StyledLink>
-                </Menu>
+                            <>
+                                <StyledLink to={"/login"}> <p>Entre</p> </StyledLink>
+                                <StyledLink to={"/cadastro"}> <p>Crie a sua conta</p> </StyledLink>
+                            </>
+                        }
+                        <StyledLink to={"/carrinho"}>
+                            <CartIconEmpty />
+                        </StyledLink>
+                    </Menu>
+                </div>
+                <ul>
+                    <li>Eletrodoméstico</li>
+                    <li>Tecnologia</li>
+                    <li>Cuidados Pessoais</li>
+                    <li>Vestuário</li>
+                    <li>Mais Vendidos</li>
+                </ul>
             </HeaderContainer>
             {
                 !filteredProducts || filteredProducts.length === 0 ?
