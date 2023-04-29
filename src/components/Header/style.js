@@ -9,7 +9,7 @@ const HeaderContainer = styled.div`
     top: 0;
     left: 0;
 
-    background-color: #ffbd59;
+    background-color: #686868;
 
     display: flex;
     justify-content: space-around;

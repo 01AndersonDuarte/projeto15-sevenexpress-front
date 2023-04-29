@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { HeaderContainer, HeaderLogo, Menu, HeaderInput, StyledLink, HeaderButton, SearchBar } from "./style";
-import logo from "../../assets/logo3.png"
+import logo from "../../assets/logo-cinza3.png"
 import { Link } from "react-router-dom";
 import lupa from "../../assets/images.png"
 import cart from "../../assets/cart icon.jpg"
@@ -11,7 +11,7 @@ export default function Header() {
         <HeaderContainer>
             <HeaderLogo src={logo}></HeaderLogo>
             <SearchBar>
-                <HeaderInput type="text" placeholder="Faca sua pesquisa"></HeaderInput>
+                <HeaderInput type="text" placeholder="Faça sua pesquisa"></HeaderInput>
                 <hr></hr>
                 <HeaderButton><img src={lupa}></img></HeaderButton>
             </SearchBar>
