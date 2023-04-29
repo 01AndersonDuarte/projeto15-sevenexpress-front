@@ -1,5 +1,5 @@
 import Header from "../../components/Header";
-import { MainContainer, HeaderIMG, ContainerLoading, Item } from "./style";
+import { ContainerLoading, Item, ProductsSlide, Carousel, CarouselItem, Inner } from "./style";
 import { LoadingRings } from "../../components/Loading/Loading";
 
 import 'react-slideshow-image/dist/styles.css'
@@ -16,6 +16,7 @@ import header5 from "../../assets/header11.jpg"
 import React, { useState, useEffect, useRef } from "react";
 import { port } from "../../port";
 import axios from "axios";
+import { motion } from "framer-motion"
 
 export default function HomePage() {
     const [products, setProducst] = useState();
@@ -23,12 +24,21 @@ export default function HomePage() {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const inputRef = useRef(null);
 
+    const carousel = useRef()
+    const [width, setWidth] = useState(0)
+
+    console.log(width)
+    console.log(carousel.current?.scrollWidth)
+    console.log(carousel.current?.offsetWidth)
+
     useEffect(() => {
+
         const url = `${port}/produtos`;
 
         axios.get(url)
             .then(sucess => {
                 setProducst(sucess.data);
+                setWidth(carousel.current?.scrollWidth - carousel.current?.offsetWidth);
             })
             .catch(fail => alert(fail.response.data));
 
@@ -105,6 +115,17 @@ export default function HomePage() {
                     ))}
                 </Slide>
             </div>
+            <ProductsSlide>
+                <Carousel ref={carousel} as={motion.div} whileTap={{cursor: "grabbing"}}>
+                    <Inner as={motion.div} drag="x" dragConstraints={{right: 0, left: -width}} /* initial={{x: 300}} animate={{x: 0}} transition={{duration: 0.6}} */>
+                        {products.map(p => (
+                            <CarouselItem as={motion.div} key={p.image}>
+                                <img src={p.image}></img>
+                            </CarouselItem>
+                        ))}
+                    </Inner>
+                </Carousel>
+            </ProductsSlide>
         </div>
     )
 }

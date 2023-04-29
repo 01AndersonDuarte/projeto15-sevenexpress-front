@@ -29,9 +29,47 @@ const Item = styled.li`
     }
 `
 
+const ProductsSlide = styled.div`
+    width: 100%;
+    max-width: 70%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+const Carousel = styled.div`
+    cursor: grab;
+    overflow: hidden;
+
+    //height: 400px;
+    display: flex;
+    align-items: center;
+`
+
+const Inner = styled.div`
+    display: flex;
+`
+
+const CarouselItem = styled.div`
+    height: 200px;
+    width: 100%;
+    padding: 14px;
+    img {
+        width: 300px;
+        height: 100%;
+        border-radius: 12px;
+        pointer-events: none;
+    }
+`
+
 export {
     MainContainer,
     HeaderIMG,
     ContainerLoading,
-    Item
+    Item,
+    ProductsSlide,
+    Carousel,
+    Inner,
+    CarouselItem
 }
