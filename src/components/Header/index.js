@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 import lupa from "../../assets/images.png"
 import cart from "../../assets/cart icon.jpg"
 
-export default function Header() {
+export default function Header({ setResearch, searchValue, inputRef }) {
 
     return (
         <HeaderContainer>
             <HeaderLogo src={logo}></HeaderLogo>
             <SearchBar>
-                <HeaderInput type="text" placeholder="Faça sua pesquisa"></HeaderInput>
+                <HeaderInput type="text" placeholder="Faca sua pesquisa"></HeaderInput>
                 <hr></hr>
                 <HeaderButton><img src={lupa}></img></HeaderButton>
             </SearchBar>
