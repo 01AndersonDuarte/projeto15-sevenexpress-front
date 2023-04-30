@@ -22,18 +22,31 @@ export default function Carrinho() {
 
     }, [products])
 
+    //console.log(products)
     
-        function deleteProduct(e, idProduct, idUser){
-            e.preventDefault()
-            
-            const body = {idProduct, idUser}
-            const url = `${port}/carrinho/${idUser}`
+    function deleteProduct(e, idProduct, idUser){
+        e.preventDefault()
+        
+        const body = {idProduct, idUser}
+        const url = `${port}/carrinho/${idUser}`
 
-            axios.post(url, body).then(sucess => {
-                alert(sucess.data)
-                window.location.realod()
-            }).catch(fail => console.log(fail.response.data))
-        }
+        axios.post(url, body).then(sucess => {
+            alert(sucess.data)
+        }).catch(fail => console.log(fail.response.data))
+    }
+
+    function finishPurchase(e){
+        e.preventDefault()
+
+        const url = `${port}/carrinho/${id}`
+        const body = products.map(element => element.idProduct)
+
+        axios.put(url, body).then(sucess => {
+            alert(sucess.data)
+        }).then(fail => console.log(fail.response.data))
+
+        console.log(body)
+    }
 
     
 
@@ -99,7 +112,7 @@ export default function Carrinho() {
                                 <p>Total: <strong>R${products.reduce((prev, e ) => prev + e.price, 0)}</strong></p>
                                 <p>Frete: <strong>R$0</strong></p>
                             </div>
-                            <button>IR PARA O PAGAMENTO</button>
+                            <button onClick={finishPurchase}>FINALIZAR COMPRA</button>
                         </div>
                     </Payment>
                 </Container>

@@ -13,6 +13,7 @@ import useAuth from "../../hooks/useAuth";
 export default function ProductPage() {
     const { id } = useParams();
     const [product, setProduct] = useState();
+    const [on, setOne] = useState(false)
 
     const {auth} = useAuth()
     //console.log(auth, "AUTORIZACAO")
@@ -36,6 +37,7 @@ export default function ProductPage() {
 
     function postCarrinho(e){
         e.preventDefault()
+        setOne(true)
 
         if(!auth) return alert("Voce precisa fazer login primeiro")
 
@@ -43,7 +45,10 @@ export default function ProductPage() {
         const body = {idProduct: product._id, idUser: auth.id, name: product.name, price: product.price, image: product.image}
 
         axios.post(url, body)
-            .then(sucess => alert(sucess.data))
+            .then(sucess => {
+                alert(sucess.data)
+                setOne(false)
+            })
             .catch(fail => fail.response.data) 
     }
 
@@ -61,7 +66,7 @@ export default function ProductPage() {
                         <h3>R$ {parseFloat(product.price).toFixed(2)}</h3>
                         <h4>Disponível em estoque: {product.amount}</h4>
                     </div>
-                    <FormButton onClick={postCarrinho}>Adicionar ao carrinho</FormButton>
+                    <FormButton onClick={postCarrinho} disabled={on}>Adicionar ao carrinho</FormButton>
                 </InfoProduct>
             </WindowProduct>
         </ContainerProduct>
