@@ -8,10 +8,16 @@ import { FormButton } from "../../components/FormComponents";
 
 import axios from "axios";
 import styled from "styled-components";
+import useAuth from "../../hooks/useAuth";
 
 export default function ProductPage() {
     const { id } = useParams();
     const [product, setProduct] = useState();
+
+    const {auth} = useAuth()
+    //console.log(auth, "AUTORIZACAO")
+
+    console.log(product)
 
     useEffect(() => {
         const url = `${port}/produtos/${id}`;
@@ -19,13 +25,26 @@ export default function ProductPage() {
             setProduct(sucess.data);
         }).catch(fail => alert(fail.response.data));
     }, [id]);
-    console.log(product)
+    //console.log(product)
     if (!product) {
         return (
             <ContainerProduct>
                 <LoadingRings />
             </ContainerProduct>
         );
+    }
+
+    function postCarrinho(e){
+        e.preventDefault()
+
+        if(!auth) return alert("Voce precisa fazer login primeiro")
+
+        const url = `${port}/carrinho`
+        const body = {idUser: auth.id, name: product.name, price: product.price, image: product.image}
+
+        axios.post(url, body)
+            .then(sucess => console.log(sucess.data))
+            .catch(fail => fail.response.data) 
     }
 
     return (
@@ -42,7 +61,7 @@ export default function ProductPage() {
                         <h3>R$ {parseFloat(product.price).toFixed(2)}</h3>
                         <h4>Disponível em estoque: {product.amount}</h4>
                     </div>
-                    <FormButton>Adicionar ao carrinho</FormButton>
+                    <FormButton onClick={postCarrinho}>Adicionar ao carrinho</FormButton>
                 </InfoProduct>
             </WindowProduct>
         </ContainerProduct>

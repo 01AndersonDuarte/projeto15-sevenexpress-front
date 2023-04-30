@@ -79,9 +79,15 @@ export default function Header() {
                                 <StyledLink to={"/cadastro"}> <p>Crie a sua conta</p> </StyledLink>
                             </>
                         }
-                        <StyledLink to={"/carrinho"}>
+                        {auth ?
+                        <StyledLink to={`/carrinho/${auth.id}`}>
                             <CartIconEmpty />
                         </StyledLink>
+                        :
+                        <StyledLink onClick={() => alert("Realize um login primeiro")}>
+                            <CartIconEmpty />
+                        </StyledLink>
+                        }
                     </Menu>
                 </div>
                 <ul>
