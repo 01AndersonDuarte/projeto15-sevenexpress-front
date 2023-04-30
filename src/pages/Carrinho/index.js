@@ -20,7 +20,22 @@ export default function Carrinho() {
             .then(sucess => setProducts(sucess.data))
             .catch(fail => console.log(fail.response.data))
 
-    }, [])
+    }, [products])
+
+    
+        function deleteProduct(e, idProduct, idUser){
+            e.preventDefault()
+            
+            const body = {idProduct, idUser}
+            const url = `${port}/carrinho/${idUser}`
+
+            axios.post(url, body).then(sucess => {
+                alert(sucess.data)
+                window.location.realod()
+            }).catch(fail => console.log(fail.response.data))
+        }
+
+    
 
     if (!auth || auth.id !== id || !products) {
         return (
@@ -57,18 +72,18 @@ export default function Carrinho() {
                             <AiOutlineShoppingCart></AiOutlineShoppingCart>
                             <h1>Produtos do seu carrinho</h1>
                         </div>
-                        {products.map(e => {
+                        {products.map(element => {
                             return (
                                 <ProductLi>
                                     <div>
-                                        <img src={e.image}></img>
+                                        <img src={element.image}></img>
                                         <div>
-                                            <p>{e.name}</p>
-                                            <p>R$ {e.price}</p>
+                                            <p>{element.name}</p>
+                                            <p>R$ {element.price}</p>
                                         </div>
                                     </div>
                                     <div>
-                                        <FaTrashAlt></FaTrashAlt>
+                                        <FaTrashAlt onClick={(e) => deleteProduct(e, element.idProduct, element.idUser)}></FaTrashAlt>
                                     </div>
                                 </ProductLi>
                             )

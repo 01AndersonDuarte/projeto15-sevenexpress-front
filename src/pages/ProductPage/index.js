@@ -40,10 +40,10 @@ export default function ProductPage() {
         if(!auth) return alert("Voce precisa fazer login primeiro")
 
         const url = `${port}/carrinho`
-        const body = {idUser: auth.id, name: product.name, price: product.price, image: product.image}
+        const body = {idProduct: product._id, idUser: auth.id, name: product.name, price: product.price, image: product.image}
 
         axios.post(url, body)
-            .then(sucess => console.log(sucess.data))
+            .then(sucess => alert(sucess.data))
             .catch(fail => fail.response.data) 
     }
 
