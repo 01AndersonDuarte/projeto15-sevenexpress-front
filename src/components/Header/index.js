@@ -3,7 +3,6 @@ import { HeaderContainer, HeaderLogo, Menu, HeaderInput, StyledLink, HeaderButto
 import logo from "../../assets/Logo.png"
 import { Link } from "react-router-dom";
 import lupa from "../../assets/images.png"
-import cart from "../../assets/cart icon.jpg"
 
 import { useNavigate } from "react-router-dom";
 import { port } from "../../port";
