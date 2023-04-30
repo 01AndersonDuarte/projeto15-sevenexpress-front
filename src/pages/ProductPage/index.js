@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { port } from "../../port";
 import Header from "../../components/Header";
-import { LoadingRings } from "../../components/Loading/Loading";
+import { LoadingRings, LoadingThreeDots } from "../../components/Loading/Loading";
 import { FormButton } from "../../components/FormComponents";
 
 import axios from "axios";
@@ -14,10 +14,12 @@ export default function ProductPage() {
     const { id } = useParams();
     const [product, setProduct] = useState();
 
-    const {auth} = useAuth()
-    //console.log(auth, "AUTORIZACAO")
+    const navigate = useNavigate();
+    const [request, setRequest] = useState(null);
 
-    console.log(product)
+
+    const { auth, login } = useAuth()
+    //console.log(auth, "AUTORIZACAO")
 
     useEffect(() => {
         const url = `${port}/produtos/${id}`;
@@ -34,25 +36,31 @@ export default function ProductPage() {
         );
     }
 
-    function postCarrinho(e){
+    function postCarrinho(e) {
+        setRequest(true);
         e.preventDefault()
 
-        if(!auth) return alert("Voce precisa fazer login primeiro")
+        if (!auth) return navigate("/login");
 
         const url = `${port}/carrinho`
-        const body = {idProduct: product._id, idUser: auth.id, name: product.name, price: product.price, image: product.image}
+        const body = { idProduct: product._id, idUser: auth.id, name: product.name, price: product.price, image: product.image }
 
         axios.post(url, body)
-            .then(sucess => alert(sucess.data))
-            .catch(fail => fail.response.data) 
+            .then(sucess => {
+                setRequest(false);
+            })
+            .catch(fail => fail.response.data)
+
+        const user = JSON.parse(localStorage.getItem("auth"));
+        login({ ...user, cart: [...user.cart, body] }); //Enviando produtos adicionados para o localStorage
     }
 
     return (
         <ContainerProduct>
             <Header />
-            <WindowProduct>
+            <WindowProduct request={request}>
                 <ImageProduct src={product.image}></ImageProduct>
-                <InfoProduct>
+                <InfoProduct request={request}>
                     <div>
                         <h1>{product.name}</h1>
                         <h2>{product.description}</h2>
@@ -61,7 +69,12 @@ export default function ProductPage() {
                         <h3>R$ {parseFloat(product.price).toFixed(2)}</h3>
                         <h4>Disponível em estoque: {product.amount}</h4>
                     </div>
-                    <FormButton onClick={postCarrinho}>Adicionar ao carrinho</FormButton>
+                    <span>
+                        <FormButton onClick={postCarrinho}  disabled={request}>
+                            {request ? <LoadingThreeDots/> : "Adicionar ao carrinho" }
+                        </FormButton>
+                    </span>
+                    
                 </InfoProduct>
             </WindowProduct>
         </ContainerProduct>
@@ -80,7 +93,7 @@ const ContainerProduct = styled.div`
 const WindowProduct = styled.div`
     width: 100%;
     font-family: 'Roboto';
-    border: solid 0.5px rgba(0, 0, 0, 0.09);
+    border: ${({request})=> request===false ? "solid 1px #39ff39" : "solid 0.5px rgba(0, 0, 0, 0.09)"};
     border-radius: 10px;
     padding: 5%;
     display: flex;
@@ -101,7 +114,7 @@ const InfoProduct = styled.div`
     width: 40%;
     max-height: 100%;
     padding: 1%;
-    border: solid 0.5px rgba(0, 0, 0, 0.09);
+    border: ${({request})=> request===false ? "solid 1px #39ff39" : "solid 0.5px rgba(0, 0, 0, 0.09)"};
     border-radius: 5px;
     color: #2c2c2c;
 
@@ -124,6 +137,17 @@ const InfoProduct = styled.div`
         font-size: 25px;
         line-height: 40px;
     }
-    
+    h4{
+        font-weight: 300;
+        font-size: 15px;
+        line-height: 40px;
+    }
+    span{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
 `;
