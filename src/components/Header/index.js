@@ -68,7 +68,7 @@ export default function Header() {
                 <Menu>
                     {auth ?
                         <p>Olá, {auth.name}</p>
-                            :
+                        :
                         <>
                             <StyledLink to={"/login"}> <p>Entre</p> </StyledLink>
                             <StyledLink to={"/cadastro"}>
@@ -77,9 +77,15 @@ export default function Header() {
                         </>
                     }
 
-                    <StyledLink to={"/carrinho"}>
-                        <CartIconEmpty />
-                    </StyledLink>
+                    {auth ?
+                        <StyledLink to={`/carrinho/${auth.id}`}>
+                            <CartIconEmpty />
+                        </StyledLink>
+                        :
+                        <StyledLink onClick={() => alert("Realize um login primeiro")}>
+                            <CartIconEmpty />
+                        </StyledLink>
+                    }
                 </Menu>
             </HeaderContainer>
             {
