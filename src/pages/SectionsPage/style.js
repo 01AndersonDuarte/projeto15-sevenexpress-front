@@ -17,13 +17,15 @@ export const WindowSection = styled.div`
     border-radius: 10px;
     padding: 5%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
     /* background-color: red; */
 `;
 
 export const ProductCard = styled.div`
     width: 250px;
     height: 450px;
+    margin-right: 20px;
     padding: 1%;
     border: solid 0.5px rgba(0, 0, 0, 0.09);
     border-radius: 10px;

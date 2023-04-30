@@ -85,11 +85,11 @@ export default function Header() {
                     </Menu>
                 </div>
                 <ul>
-                    <li>Eletrodoméstico</li>
-                    <li>Tecnologia</li>
-                    <li>Cuidados Pessoais</li>
-                    <li>Vestuário</li>
-                    <li>Mais Vendidos</li>
+                <StyledLink to={`/categoria/eletrodomestico`}><li>Eletrodoméstico</li></StyledLink>
+                <StyledLink to={`/categoria/tecnologia`}><li>Tecnologia</li></StyledLink>
+                <StyledLink to={`/categoria/cuidado pessoal`}><li>Cuidados Pessoais</li></StyledLink>
+                <StyledLink to={`/categoria/vestuario`}><li>Vestuário</li></StyledLink>
+                <StyledLink to={`/categoria/mais vendidos`}><li>Mais Vendidos</li></StyledLink>
                 </ul>
             </HeaderContainer>
             {

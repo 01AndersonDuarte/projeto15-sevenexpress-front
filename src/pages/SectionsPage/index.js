@@ -20,7 +20,7 @@ export default function SectionPage() {
             setSectionProducts(sucess.data);
             console.log(sucess.data);
         }).catch(fail => alert(fail.response.data));
-    }, []);
+    }, [section]);
 
     if (section !== 'eletrodomestico' && section !== 'cuidado pessoal'
         && section !== 'mais vendidos' && section !== 'tecnologia' && section !== 'vestuario') {

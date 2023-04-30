@@ -17,7 +17,7 @@ const HeaderContainer = styled.div`
         align-items: center;
     }
     ul{
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 100;
         color: #2c2c2c;
         box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
@@ -30,11 +30,9 @@ const HeaderContainer = styled.div`
         li{
             cursor: pointer;
             &:hover{
-                transform: scale(1.09);
+                transform: scale(1.15);
                 color: #000;
-                padding: 0.7%;
-                border: solid 0.5px rgba(255, 255, 255, 1);
-                border-radius: 2px;
+                font-weight: 400;
             }
         }
     }
@@ -67,10 +65,10 @@ const HeaderLogo = styled.img`
 
 const StyledLink = styled(Link)`
     text-decoration: none;
-    color: 	#333333;
+    color: 	#2c2c2c;
 
-    font-size: 18px;
-    font-weight: 600;
+    /* font-size: 18px; */
+    /* font-weight: 600; */
 `
 
 const HeaderInput = styled.input`
