@@ -16,7 +16,7 @@ export default function SingIn() {
 
     useEffect(() => {
         if (auth) {
-            navigate("/home")
+            navigate("/")
         }
     }, [])
 

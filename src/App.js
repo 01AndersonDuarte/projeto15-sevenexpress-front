@@ -5,6 +5,7 @@ import SingIn from './pages/SignIn';
 import AuthProvider from './contexts/AuthContext';
 import HomePage from './pages/HomePage';
 import ProductPage  from './pages/ProductPage';
+import SectionPage from './pages/SectionsPage';
 import Carrinho from './pages/Carrinho';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/cadastro" element={<SignUp></SignUp>} />
           <Route path="/login" element={<SingIn></SingIn>} />
           <Route path="/produto/:id" element={<ProductPage></ProductPage>} />
+          <Route path="/categoria/:section" element={<SectionPage></SectionPage>} />
           <Route path="/carrinho/:id" element={<Carrinho></Carrinho>}></Route>
         </Routes>
       </AuthProvider>
