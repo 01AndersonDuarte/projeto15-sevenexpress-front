@@ -13,6 +13,7 @@ import useAuth from "../../hooks/useAuth";
 export default function ProductPage() {
     const { id } = useParams();
     const [product, setProduct] = useState();
+    const [on, setOne] = useState(false)
 
     const navigate = useNavigate();
     const [request, setRequest] = useState(null);
@@ -39,6 +40,7 @@ export default function ProductPage() {
     function postCarrinho(e) {
         setRequest(true);
         e.preventDefault()
+        setOne(true)
 
         if (!auth) return navigate("/login");
 
@@ -47,12 +49,15 @@ export default function ProductPage() {
 
         axios.post(url, body)
             .then(sucess => {
+                alert(sucess.data)
+                setOne(false)
                 setRequest(false);
             })
-            .catch(fail => fail.response.data)
-
-        const user = JSON.parse(localStorage.getItem("auth"));
+            .catch(fail => fail.response.data) 
+            
+            const user = JSON.parse(localStorage.getItem("auth"));
         login({ ...user, cart: [...user.cart, body] }); //Enviando produtos adicionados para o localStorage
+              
     }
 
     return (
@@ -69,6 +74,7 @@ export default function ProductPage() {
                         <h3>R$ {parseFloat(product.price).toFixed(2)}</h3>
                         <h4>Disponível em estoque: {product.amount}</h4>
                     </div>
+
                     <span>
                         <FormButton onClick={postCarrinho}  disabled={request}>
                             {request ? <LoadingThreeDots/> : "Adicionar ao carrinho" }
