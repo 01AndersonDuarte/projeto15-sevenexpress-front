@@ -10,7 +10,7 @@ const Container = styled.div`
     width: 85%;
     height: 100%;
 
-    margin-top: 150px;
+    margin-top: 200px;
     gap: 20px;
 
 `
