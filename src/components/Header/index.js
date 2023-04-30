@@ -9,7 +9,7 @@ import { port } from "../../port";
 import axios from "axios";
 import { Item } from "../../pages/HomePage/style";
 
-import { CartIconEmpty } from "./style";
+import { CartIconEmpty, CartIconFull } from "./style";
 import useAuth from "../../hooks/useAuth";
 
 export default function Header() {
@@ -64,7 +64,12 @@ export default function Header() {
                             ref={inputRef}
                         />
                         <hr></hr>
-                        <HeaderButton><img src={lupa}></img></HeaderButton>
+                        <HeaderButton onClick={()=>{
+                            setSearchValue('');
+                            navigate("/pesquisa", { state:  filteredProducts  });
+                            }} disabled={ searchValue==='' ? true : false }>
+                                <img src={lupa}/>
+                        </HeaderButton>
                     </SearchBar>
                     <Menu>
                         {auth ?
@@ -80,22 +85,22 @@ export default function Header() {
                             </>
                         }
                         {auth ?
-                        <StyledLink to={`/carrinho/${auth.id}`}>
-                            <CartIconEmpty />
-                        </StyledLink>
-                        :
-                        <StyledLink onClick={() => alert("Realize um login primeiro")}>
-                            <CartIconEmpty />
-                        </StyledLink>
+                            <StyledLink to={`/carrinho/${auth.id}`}>
+                                {auth.cart.length === 0 ? <CartIconEmpty /> : <CartIconFull />}
+                            </StyledLink>
+                            :
+                            <StyledLink onClick={() => alert("Realize um login primeiro")}>
+                                <CartIconEmpty />
+                            </StyledLink>
                         }
                     </Menu>
                 </div>
                 <ul>
-                <StyledLink to={`/categoria/eletrodomestico`}><li>Eletrodoméstico</li></StyledLink>
-                <StyledLink to={`/categoria/tecnologia`}><li>Tecnologia</li></StyledLink>
-                <StyledLink to={`/categoria/cuidado pessoal`}><li>Cuidados Pessoais</li></StyledLink>
-                <StyledLink to={`/categoria/vestuario`}><li>Vestuário</li></StyledLink>
-                <StyledLink to={`/categoria/mais vendidos`}><li>Mais Vendidos</li></StyledLink>
+                    <StyledLink to={`/categoria/eletrodomestico`}><li>Eletrodoméstico</li></StyledLink>
+                    <StyledLink to={`/categoria/tecnologia`}><li>Tecnologia</li></StyledLink>
+                    <StyledLink to={`/categoria/cuidado pessoal`}><li>Cuidados Pessoais</li></StyledLink>
+                    <StyledLink to={`/categoria/vestuario`}><li>Vestuário</li></StyledLink>
+                    <StyledLink to={`/categoria/mais vendidos`}><li>Mais Vendidos</li></StyledLink>
                 </ul>
             </HeaderContainer>
             {

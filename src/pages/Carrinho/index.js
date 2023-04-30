@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 
 export default function Carrinho() {
     const { id } = useParams()
-    const { auth } = useAuth()
+    const { auth, login } = useAuth()
     const [products, setProducts] = useState()
 
     useEffect(() => {
@@ -22,8 +22,6 @@ export default function Carrinho() {
 
     }, [products])
 
-    //console.log(products)
-    
     function deleteProduct(e, idProduct, idUser){
         e.preventDefault()
         
@@ -33,6 +31,11 @@ export default function Carrinho() {
         axios.post(url, body).then(sucess => {
             alert(sucess.data)
         }).catch(fail => console.log(fail.response.data))
+        
+        
+        const user = JSON.parse(localStorage.getItem("auth"));
+        const newCart = user.cart.filter(i=>i.idProduct!==idProduct);
+        login({ ...user, cart: newCart }); //Enviando produtos adicionados para o localStorage
     }
 
     function finishPurchase(e){
@@ -48,7 +51,6 @@ export default function Carrinho() {
         console.log(body)
     }
 
-    
 
     if (!auth || auth.id !== id || !products) {
         return (
@@ -58,7 +60,7 @@ export default function Carrinho() {
         )
     }
 
-     if (products.length === 0) {
+    if (products.length === 0) {
         return (
             <>
                 <Header></Header>
@@ -109,7 +111,7 @@ export default function Carrinho() {
                                 <h1>RESUMO</h1>
                             </div>
                             <div>
-                                <p>Total: <strong>R${products.reduce((prev, e ) => prev + e.price, 0)}</strong></p>
+                                <p>Total: <strong>R${products.reduce((prev, e) => prev + e.price, 0)}</strong></p>
                                 <p>Frete: <strong>R$0</strong></p>
                             </div>
                             <button onClick={finishPurchase}>FINALIZAR COMPRA</button>

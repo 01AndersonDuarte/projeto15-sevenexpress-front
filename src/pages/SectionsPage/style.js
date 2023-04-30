@@ -26,6 +26,7 @@ export const ProductCard = styled.div`
     width: 250px;
     height: 450px;
     margin-right: 20px;
+    margin-bottom: 20px;
     padding: 1%;
     border: solid 0.5px rgba(0, 0, 0, 0.09);
     border-radius: 10px;

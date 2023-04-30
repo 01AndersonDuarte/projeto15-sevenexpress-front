@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage';
 import ProductPage  from './pages/ProductPage';
 import SectionPage from './pages/SectionsPage';
 import Carrinho from './pages/Carrinho';
+import SearchedPage from './pages/SearchedPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/produto/:id" element={<ProductPage></ProductPage>} />
           <Route path="/categoria/:section" element={<SectionPage></SectionPage>} />
           <Route path="/carrinho/:id" element={<Carrinho></Carrinho>}></Route>
+          <Route path="/pesquisa" element={<SearchedPage></SearchedPage>}></Route>
         </Routes>
       </AuthProvider>
     </BrowserRouter>

@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { Link } from "react-router-dom"
-import { BsCartDash } from "react-icons/bs";
+import { BsCartDash, BsCartPlusFill } from "react-icons/bs";
 
 const HeaderContainer = styled.div`
     position: absolute;
@@ -90,8 +90,8 @@ const HeaderInput = styled.input`
 const HeaderButton = styled.button`
     height: 50px;
     border: none;
-    
     background-color: #ffffff;
+    cursor: pointer;
 
     width: 50px;
     border-radius: 0px 5px 5px 0px;
@@ -124,7 +124,13 @@ const SearchBar = styled.div`
 `
 const CartIconEmpty = styled(BsCartDash)`
     font-size: 25px;
-    color: #FFFFFF;
+    color: #FFF;
+    cursor: pointer;
+`;
+
+const CartIconFull = styled(BsCartPlusFill)`
+    font-size: 25px;
+    color: #2c2c2c;
     cursor: pointer;
 `;
 
@@ -136,6 +142,6 @@ export {
     HeaderInput,
     HeaderButton,
     SearchBar,
-    CartIconEmpty
-
+    CartIconEmpty,
+    CartIconFull
 }

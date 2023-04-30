@@ -5,23 +5,33 @@ import axios from "axios"
 import { FormContainer, FormImage, PageContainer, FormButton, FormInput, PageForm, StyledLink } from "../../components/FormComponents"
 import logo from "../../assets/Orange_Simple_Online_Shopping_Logo_1.png"
 import { useNavigate } from "react-router-dom";
+import { LoadingThreeDots } from "../../components/Loading/Loading"
 
 export default function SignUp() {
     const [registrationData, setRegistrationData] = useState({ name: "", email: "", password: "", confirmPassword: "" });
     const navigate = useNavigate();
+    const [request, setRequest] = useState(false);
 
     function signUp(e) {
+        setRequest(true);
         e.preventDefault()
 
-        if (registrationData.password !== registrationData.confirmPassword) return alert("As senhas nao sao compativeis")
+        if (registrationData.password !== registrationData.confirmPassword){
+            setRequest(false);
+            return alert("As senhas nao sao compativeis");
+        }
 
         const url = `${port}/cadastro`
         const { confirmPassword, ...register } = registrationData;
         axios.post(url, register)
             .then(sucess => {
+                setRequest(false);
                 alert(sucess.data);
                 navigate("/login");
-            }).catch(fail => alert(fail.response.data))
+            }).catch(fail => {
+                setRequest(false);
+                alert(fail.response.data)
+            })
     }
 
     function insertRegistrationData(event) {
@@ -73,7 +83,9 @@ export default function SignUp() {
                         onChange={insertRegistrationData}
                         onInvalid={(event) => event.target.setCustomValidity('Por favor, preencha este campo.')}
                     />
-                    <FormButton type="submit">Cadastro</FormButton>
+                    <FormButton type="submit">
+                        {request ? <LoadingThreeDots/> : "Cadastro"}
+                    </FormButton>
                 </PageForm>
                 <StyledLink to={"/login"}>Ja tem cadastro? Entao siga para o seu login aqui!</StyledLink>
             </FormContainer>

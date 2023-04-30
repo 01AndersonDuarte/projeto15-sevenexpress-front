@@ -5,14 +5,14 @@ import useAuth from "../../hooks/useAuth"
 import { useNavigate } from "react-router-dom"
 import { port } from "../../port"
 import logo from "../../assets/Orange_Simple_Online_Shopping_Logo_1.png"
+import { LoadingThreeDots } from "../../components/Loading/Loading"
 
 export default function SingIn() {
     const [loginData, setLoginData] = useState({ email: "", password: "" })
 
     const { auth, login } = useAuth()
     const navigate = useNavigate()
-
-    console.log(auth)
+    const [request, setRequest] = useState(false);
 
     useEffect(() => {
         if (auth) {
@@ -21,16 +21,21 @@ export default function SingIn() {
     }, [])
 
     function singIn(e) {
+        setRequest(true);
         e.preventDefault()
 
         const url = `${port}/login`
 
         axios.post(url, loginData)
             .then(sucess => {
+                setRequest(false);
                 login(sucess.data)
                 navigate("/")
             })
-            .catch(fail => alert(fail.response.data))
+            .catch(fail => {
+                setRequest(false);
+                alert(fail.response.data)
+            })
     }
 
 
@@ -63,7 +68,9 @@ export default function SingIn() {
                         onChange={insertLoginData}
                         onInvalid={(event) => event.target.setCustomValidity('Insira sua senha.')}
                     />
-                    <FormButton type="submit">Login</FormButton>
+                    <FormButton type="submit">
+                        {request ? <LoadingThreeDots/> : "Entrar"}
+                    </FormButton>
                 </PageForm>
                 <StyledLink to={"/cadastro"}>Nao possui uma conta? Faca o cadastro aqui!</StyledLink>
             </FormContainer>
