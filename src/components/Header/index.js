@@ -64,7 +64,12 @@ export default function Header() {
                             ref={inputRef}
                         />
                         <hr></hr>
-                        <HeaderButton><img src={lupa}></img></HeaderButton>
+                        <HeaderButton onClick={()=>{
+                            setSearchValue('');
+                            navigate("/pesquisa", { state:  filteredProducts  });
+                            }} disabled={ searchValue==='' ? true : false }>
+                                <img src={lupa}/>
+                        </HeaderButton>
                     </SearchBar>
                     <Menu>
                         {auth ?

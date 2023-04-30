@@ -90,8 +90,8 @@ const HeaderInput = styled.input`
 const HeaderButton = styled.button`
     height: 50px;
     border: none;
-    
     background-color: #ffffff;
+    cursor: pointer;
 
     width: 50px;
     border-radius: 0px 5px 5px 0px;

@@ -8,6 +8,7 @@ import { ContainerSection, WindowSection, ProductCard, InfoProduct, StyledLink }
 import { LoadingRings } from "../../components/Loading/Loading";
 
 import { port } from "../../port";
+import WindowProducts from "../../components/SearchComponents/WindowProducts";
 
 export default function SectionPage() {
     const [sectionProducts, setSectionProducts] = useState();
@@ -36,32 +37,6 @@ export default function SectionPage() {
     }
 
     return (
-        <ContainerSection>
-            <Header />
-            <WindowSection>
-                {sectionProducts.map((p) => <Product key={p._id} product={p} />)}
-            </WindowSection>
-        </ContainerSection>
-    );
-}
-
-function Product({ product }) {
-    const { name, image, price, description, amount, _id } = product;
-    return (
-        <StyledLink to={`/produto/${_id}`}>
-            <ProductCard>
-                <img src={image}></img>
-                <InfoProduct>
-                    <div>
-                        <h1>{name}</h1>
-                        <h2>{description}</h2>
-                    </div>
-                    <div>
-                        <h3>R$ {parseFloat(price).toFixed(2)}</h3>
-                        <h4>Disponível em estoque: {amount}</h4>
-                    </div>
-                </InfoProduct>
-            </ProductCard>
-        </StyledLink>
+        <WindowProducts products={sectionProducts}/>
     );
 }
