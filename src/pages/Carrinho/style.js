@@ -31,7 +31,7 @@ const Payment = styled.div`
 
     div {
         padding-top: 15px;
-        padding-bottom: 15px;
+        //padding-bottom: 15px;
         box-sizing: border-box;
         width: 90%;
         height: 95%;
@@ -43,6 +43,8 @@ const Payment = styled.div`
         div:nth-child(1){
             display: flex;
             width: 100%;
+            height: 100px;
+            justify-content: flex-start;
             align-items: center;
             gap: 10px;
             svg {
@@ -56,26 +58,25 @@ const Payment = styled.div`
         }
 
         div:nth-child(2){
+            justify-content: flex-start;
             font-size: 20px;
+            gap: 10px;
             strong {
                 color: green;
             }
         }
     }
 
-    button {
-        font-family: "Roboto", sans-serif;
-        font-size: 17px;
-        font-weight: 700;
+    span {
         width: 100%;
-        background-color: #000000;
-        color: #FFFFFF;
-        border: none;
-        box-sizing: border-box;
-        padding: 10px;
-        border-radius: 5px;
-        margin-top: 200px;
+        button {
+            width: 100%;
+            svg{
+                margin-top: 15px;
+            }
+        }
     }
+
 `
 
 const Products = styled.ul`

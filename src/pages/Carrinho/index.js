@@ -8,11 +8,14 @@ import useAuth from "../../hooks/useAuth";
 import { useEffect, useState } from 'react'
 import axios from "axios"
 import { useParams } from "react-router-dom";
+import { LoadingThreeDots } from "../../components/Loading/Loading";
+import { FormButton } from "../../components/FormComponents";
 
 export default function Carrinho() {
     const { id } = useParams()
     const { auth, login } = useAuth()
     const [products, setProducts] = useState()
+    const [request, setRequest] = useState(false);
 
     useEffect(() => {
         const url = `${port}/carrinho/${id}`
@@ -22,31 +25,38 @@ export default function Carrinho() {
 
     }, [products])
 
-    function deleteProduct(e, idProduct, idUser){
+    function deleteProduct(e, idProduct, idUser) {
         e.preventDefault()
-        
-        const body = {idProduct, idUser}
+
+        const body = { idProduct, idUser }
         const url = `${port}/carrinho/${idUser}`
 
         axios.post(url, body).then(sucess => {
             alert(sucess.data)
         }).catch(fail => console.log(fail.response.data))
-        
-        
+
+
         const user = JSON.parse(localStorage.getItem("auth"));
-        const newCart = user.cart.filter(i=>i.idProduct!==idProduct);
+        const newCart = user.cart.filter(i => i.idProduct !== idProduct);
         login({ ...user, cart: newCart }); //Enviando produtos adicionados para o localStorage
     }
 
-    function finishPurchase(e){
+    function finishPurchase(e) {
         e.preventDefault()
 
+        setRequest(true)
         const url = `${port}/carrinho/${id}`
         const body = products.map(element => element.idProduct)
 
         axios.put(url, body).then(sucess => {
             alert(sucess.data)
-        }).then(fail => console.log(fail.response.data))
+            setRequest(false)
+            const user = JSON.parse(localStorage.getItem("auth"));
+            login({ ...user, cart: [] });
+        }).then(fail => {
+            console.log(fail.response.data)
+            setRequest(false)
+        })
 
         console.log(body)
     }
@@ -114,7 +124,11 @@ export default function Carrinho() {
                                 <p>Total: <strong>R${products.reduce((prev, e) => prev + e.price, 0)}</strong></p>
                                 <p>Frete: <strong>R$0</strong></p>
                             </div>
-                            <button onClick={finishPurchase}>FINALIZAR COMPRA</button>
+                            <span>
+                                <FormButton onClick={finishPurchase} disabled={request}>
+                                    {request ? <LoadingThreeDots></LoadingThreeDots> : "FINALIZAR COMPRA"}
+                                </FormButton>
+                            </span>
                         </div>
                     </Payment>
                 </Container>
