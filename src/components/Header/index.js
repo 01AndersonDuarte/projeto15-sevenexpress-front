@@ -27,8 +27,8 @@ export default function Header() {
         axios.get(url)
             .then(sucess => {
                 const products = [];
-                sucess.data.map((p)=>{
-                    if(p.category!=="mais vendidos"){
+                sucess.data.map((p) => {
+                    if (p.category !== "mais vendidos") {
                         products.push(p);
                     }
                 });
@@ -70,11 +70,11 @@ export default function Header() {
                             ref={inputRef}
                         />
                         <hr></hr>
-                        <HeaderButton onClick={()=>{
+                        <HeaderButton onClick={() => {
                             setSearchValue('');
-                            navigate("/pesquisa", { state:  filteredProducts  });
-                            }} disabled={ searchValue==='' ? true : false }>
-                                <img src={lupa}/>
+                            navigate("/pesquisa", { state: filteredProducts });
+                        }} disabled={searchValue === '' ? true : false}>
+                            <img src={lupa} />
                         </HeaderButton>
                     </SearchBar>
                     <Menu>
@@ -83,6 +83,8 @@ export default function Header() {
                                 <p>Olá, {auth.name}</p>
                                 <StyledLink to={"/"}> <p>Meus pedidos</p> </StyledLink>
                                 <StyledLink to={"/"}> <p>Sair</p> </StyledLink>
+                                {auth.root && <StyledLink to={"/create-item"}> <p> Criar </p> </StyledLink>}
+
                             </>
                             :
                             <>

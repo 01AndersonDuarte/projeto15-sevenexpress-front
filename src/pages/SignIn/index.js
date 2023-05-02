@@ -29,8 +29,9 @@ export default function SingIn() {
         axios.post(url, loginData)
             .then(sucess => {
                 setRequest(false);
-                login(sucess.data)
-                navigate("/")
+                console.log(sucess.data);
+                login(sucess.data);
+                navigate("/");
             })
             .catch(fail => {
                 setRequest(false);

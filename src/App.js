@@ -8,6 +8,7 @@ import ProductPage  from './pages/ProductPage';
 import SectionPage from './pages/SectionsPage';
 import Carrinho from './pages/Carrinho';
 import SearchedPage from './pages/SearchedPage';
+import CreateItem from './pages/Create';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/categoria/:section" element={<SectionPage></SectionPage>} />
           <Route path="/carrinho/:id" element={<Carrinho></Carrinho>}></Route>
           <Route path="/pesquisa" element={<SearchedPage></SearchedPage>}></Route>
+          <Route path="/create-item" element={<CreateItem></CreateItem>}></Route>
         </Routes>
       </AuthProvider>
     </BrowserRouter>
