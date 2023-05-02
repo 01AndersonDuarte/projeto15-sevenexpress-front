@@ -26,7 +26,13 @@ export default function Header() {
 
         axios.get(url)
             .then(sucess => {
-                setProducst(sucess.data);
+                const products = [];
+                sucess.data.map((p)=>{
+                    if(p.category!=="mais vendidos"){
+                        products.push(p);
+                    }
+                });
+                setProducst(products);
             })
             .catch(fail => alert(fail.response.data));
 
