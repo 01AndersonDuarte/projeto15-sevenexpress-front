@@ -20,7 +20,7 @@ export default function ProductPage() {
 
 
     const { auth, login } = useAuth()
-    //console.log(auth, "AUTORIZACAO")
+    const config = { headers: { Authorization: `Bearer ${auth.token}` } };
 
     useEffect(() => {
         const url = `${port}/produtos/${id}`;
@@ -28,7 +28,7 @@ export default function ProductPage() {
             setProduct(sucess.data);
         }).catch(fail => alert(fail.response.data));
     }, [id]);
-    //console.log(product)
+
     if (!product) {
         return (
             <ContainerProduct>
@@ -47,9 +47,8 @@ export default function ProductPage() {
         const url = `${port}/carrinho`
         const body = { idProduct: product._id, idUser: auth.id, name: product.name, price: product.price, image: product.image }
 
-        axios.post(url, body)
+        axios.post(url, body, config)
             .then(sucess => {
-                alert(sucess.data)
                 setOne(false)
                 setRequest(false);
             })

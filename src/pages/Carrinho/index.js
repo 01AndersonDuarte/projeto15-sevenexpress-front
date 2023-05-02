@@ -16,10 +16,11 @@ export default function Carrinho() {
     const { auth, login } = useAuth()
     const [products, setProducts] = useState()
     const [request, setRequest] = useState(false);
+    const config = { headers: { Authorization: `Bearer ${auth.token}` } };
 
     useEffect(() => {
         const url = `${port}/carrinho/${id}`
-        axios.get(url)
+        axios.get(url, config)
             .then(sucess => setProducts(sucess.data))
             .catch(fail => console.log(fail.response.data))
 
@@ -31,7 +32,7 @@ export default function Carrinho() {
         const body = { idProduct, idUser }
         const url = `${port}/carrinho/${idUser}`
 
-        axios.post(url, body).then(sucess => {
+        axios.post(url, body, config).then(sucess => {
             alert(sucess.data)
         }).catch(fail => console.log(fail.response.data))
 
@@ -48,19 +49,16 @@ export default function Carrinho() {
         const url = `${port}/carrinho/${id}`
         const body = products.map(element => element.idProduct)
 
-        axios.put(url, body).then(sucess => {
+        axios.put(url, body, config).then(sucess => {
             alert(sucess.data)
             setRequest(false)
             const user = JSON.parse(localStorage.getItem("auth"));
             login({ ...user, cart: [] });
-        }).then(fail => {
+        }).catch(fail => {
             console.log(fail.response.data)
             setRequest(false)
         })
-
-        console.log(body)
     }
-
 
     if (!auth || auth.id !== id || !products) {
         return (
@@ -99,7 +97,7 @@ export default function Carrinho() {
                         </div>
                         {products.map(element => {
                             return (
-                                <ProductLi>
+                                <ProductLi key={element._id}>
                                     <div>
                                         <img src={element.image}></img>
                                         <div>
