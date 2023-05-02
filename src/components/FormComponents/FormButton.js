@@ -7,7 +7,7 @@ export const FormButton = styled.button`
     border: none;
     font-weight: 700;
 
-    background-color: #000000;
+    background-color: ${({amount})=>amount ? "#808080" : "#000000"};
     color: #ffffff;
     font-size: 18px;
 

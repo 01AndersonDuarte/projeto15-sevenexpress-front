@@ -64,7 +64,7 @@ export default function ProductPage() {
             <Header />
             <WindowProduct request={request}>
                 <ImageProduct src={product.image}></ImageProduct>
-                <InfoProduct request={request}>
+                <InfoProduct request={request} amount={product.amount===0}>
                     <div>
                         <h1>{product.name}</h1>
                         <h2>{product.description}</h2>
@@ -75,7 +75,7 @@ export default function ProductPage() {
                     </div>
 
                     <span>
-                        <FormButton onClick={postCarrinho}  disabled={request}>
+                        <FormButton onClick={postCarrinho}  disabled={product.amount===0 ? true : request} amount={product.amount===0}>
                             {request ? <LoadingThreeDots/> : "Adicionar ao carrinho" }
                         </FormButton>
                     </span>
@@ -146,6 +146,7 @@ const InfoProduct = styled.div`
         font-weight: 300;
         font-size: 15px;
         line-height: 40px;
+        color: ${({amount})=> amount ? "#900204" : "2c2c2c"}
     }
     span{
         width: 100%;
