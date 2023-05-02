@@ -3,7 +3,6 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import useAuth from "../../hooks/useAuth"
 import { useNavigate } from "react-router-dom"
-import { port } from "../../port"
 import logo from "../../assets/Orange_Simple_Online_Shopping_Logo_1.png"
 import { LoadingThreeDots } from "../../components/Loading/Loading"
 
@@ -24,7 +23,7 @@ export default function SingIn() {
         setRequest(true);
         e.preventDefault()
 
-        const url = `${port}/login`
+        const url = process.env.REACT_APP_SIGN_IN_URL;
 
         axios.post(url, loginData)
             .then(sucess => {

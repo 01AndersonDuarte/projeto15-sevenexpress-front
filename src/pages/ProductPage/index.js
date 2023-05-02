@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { port } from "../../port";
 import Header from "../../components/Header";
 import { LoadingRings, LoadingThreeDots } from "../../components/Loading/Loading";
 import { FormButton } from "../../components/FormComponents";
@@ -23,7 +22,7 @@ export default function ProductPage() {
     const config = { headers: { Authorization: `Bearer ${auth.token}` } };
 
     useEffect(() => {
-        const url = `${port}/produtos/${id}`;
+        const url = `${process.env.REACT_APP_GET_PRODUCT}${id}`;
         axios.get(url).then(sucess => {
             setProduct(sucess.data);
         }).catch(fail => alert(fail.response.data));
@@ -44,7 +43,8 @@ export default function ProductPage() {
 
         if (!auth) return navigate("/login");
 
-        const url = `${port}/carrinho`
+        const url = process.env.REACT_APP_POST_CARRINHO;
+
         const body = { idProduct: product._id, idUser: auth.id, name: product.name, price: product.price, image: product.image }
 
         axios.post(url, body, config)

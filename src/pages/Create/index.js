@@ -3,7 +3,6 @@ import { FormButton, FormInput } from "../../components/FormComponents";
 import { useState } from "react";
 import { LoadingThreeDots } from "../../components/Loading/Loading"
 import useAuth from "../../hooks/useAuth";
-import { port } from "../../port";
 import axios from "axios";
 import { StyledLink } from "../HomePage/style";
 
@@ -17,7 +16,7 @@ export default function CreateItem() {
         setRequest(true);
         e.preventDefault();
 
-        const url = `${port}/registrar-produto`;
+        const url = process.env.REACT_APP_POST_PRODUCT;
 
         axios.post(url, data, config)
             .then(sucess => {

@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import lupa from "../../assets/images.png"
 
 import { useNavigate } from "react-router-dom";
-import { port } from "../../port";
 import axios from "axios";
 import { Item } from "../../pages/HomePage/style";
 
@@ -22,7 +21,7 @@ export default function Header() {
     const { auth } = useAuth();
 
     useEffect(() => {
-        const url = `${port}/produtos`;
+        const url = process.env.REACT_APP_GET_PRODUCTS;
 
         axios.get(url)
             .then(sucess => {

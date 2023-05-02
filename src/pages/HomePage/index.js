@@ -14,7 +14,6 @@ import header5 from "../../assets/header11.jpg"
 // import header8 from "../../assets/header8.jpg"
 
 import React, { useState, useEffect, useRef } from "react";
-import { port } from "../../port";
 import axios from "axios";
 import {IoArrowBackCircle, IoArrowForwardCircle} from "react-icons/io5"
 
@@ -36,7 +35,7 @@ export default function HomePage() {
     }
 
     useEffect(() => {
-        const url = `${port}/produtos`;
+        const url = process.env.REACT_APP_GET_PRODUCTS;
 
         axios.get(url)
             .then(sucess => {

@@ -19,7 +19,7 @@ export default function Carrinho() {
     const config = { headers: { Authorization: `Bearer ${auth.token}` } };
 
     useEffect(() => {
-        const url = `${port}/carrinho/${id}`
+        const url = `${process.env.REACT_APP_CARRINHO}${id}`
         axios.get(url, config)
             .then(sucess => setProducts(sucess.data))
             .catch(fail => console.log(fail.response.data))
@@ -30,7 +30,7 @@ export default function Carrinho() {
         e.preventDefault()
 
         const body = { idProduct, idUser }
-        const url = `${port}/carrinho/${idUser}`
+        const url = `${process.env.REACT_APP_CARRINHO}${idUser}`
 
         axios.post(url, body, config).then(sucess => {
             alert(sucess.data)
@@ -46,7 +46,7 @@ export default function Carrinho() {
         e.preventDefault()
 
         setRequest(true)
-        const url = `${port}/carrinho/${id}`
+        const url = `${process.env.REACT_APP_CARRINHO}${id}`
         const body = products.map(element => element.idProduct)
 
         axios.put(url, body, config).then(sucess => {

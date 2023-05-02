@@ -1,5 +1,4 @@
 
-import { port } from "../../port"
 import { useState } from "react"
 import axios from "axios"
 import { FormContainer, FormImage, PageContainer, FormButton, FormInput, PageForm, StyledLink } from "../../components/FormComponents"
@@ -21,7 +20,8 @@ export default function SignUp() {
             return alert("As senhas nao sao compativeis");
         }
 
-        const url = `${port}/cadastro`
+        const url = process.env.REACT_APP_SIGN_UP_URL;
+
         const { confirmPassword, ...register } = registrationData;
         axios.post(url, register)
             .then(sucess => {

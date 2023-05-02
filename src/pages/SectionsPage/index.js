@@ -7,7 +7,6 @@ import NotFound from "../../components/NotFound/NotFound";
 import { ContainerSection, WindowSection, ProductCard, InfoProduct, StyledLink } from "./style";
 import { LoadingRings } from "../../components/Loading/Loading";
 
-import { port } from "../../port";
 import WindowProducts from "../../components/SearchComponents/WindowProducts";
 
 export default function SectionPage() {
@@ -15,7 +14,7 @@ export default function SectionPage() {
     const { section } = useParams();
 
     useEffect(() => {
-        const url = `${port}/produtos?category=${section}`;
+        const url = `${process.env.REACT_APP_GET_SECTION}${section}`;
 
         axios.get(url).then((sucess) => {
             setSectionProducts(sucess.data);
