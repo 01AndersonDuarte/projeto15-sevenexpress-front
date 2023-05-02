@@ -46,6 +46,7 @@ const Menu = styled.div`
         font-size: 15px;
         font-weight: 300;
         color: #2c2c2c;
+        cursor: pointer;
     }
 
     display: flex;
