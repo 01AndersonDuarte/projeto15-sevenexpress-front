@@ -17,9 +17,7 @@ export default function ProductPage() {
     const navigate = useNavigate();
     const [request, setRequest] = useState(null);
 
-
     const { auth, login } = useAuth()
-    const config = { headers: { Authorization: `Bearer ${auth.token}` } };
 
     useEffect(() => {
         const url = `${process.env.REACT_APP_GET_PRODUCT}${id}`;
@@ -46,6 +44,7 @@ export default function ProductPage() {
         const url = process.env.REACT_APP_POST_CARRINHO;
 
         const body = { idProduct: product._id, idUser: auth.id, name: product.name, price: product.price, image: product.image }
+        const config = { headers: { Authorization: `Bearer ${auth.token}` } };
 
         axios.post(url, body, config)
             .then(sucess => {
