@@ -56,6 +56,7 @@ export default function Header() {
     };
 
     function logout(){
+        navigate("/");
         localStorage.removeItem("auth");
         window.location.reload();
     }
